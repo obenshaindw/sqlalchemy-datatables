@@ -269,7 +269,7 @@ class DataTables:
                         True, 'true') and col.searchable:
                     sqla_obj, column_name = search(idx, col)
                     conditions.append(cast(
-                        get_attr(sqla_obj, column_name), String)
+                        get_attr(sqla_obj, column_name), String(get_attr(sqla_obj, column_name).type.length))
                         .ilike('%%%s%%' % searchValue))
             condition = or_(*conditions)
         conditions = []
@@ -282,11 +282,11 @@ class DataTables:
 
                 if col.search_like:
                     conditions.append(cast(
-                        get_attr(sqla_obj, column_name), String)
+                        get_attr(sqla_obj, column_name), String(get_attr(sqla_obj, column_name).type.length))
                         .ilike('%%%s%%' % search_value2))
                 else:
                     conditions.append(cast(
-                        get_attr(sqla_obj, column_name), String)
+                        get_attr(sqla_obj, column_name), String(get_attr(sqla_obj, column_name).type.length))
                         .__eq__(search_value2))
 
                 if condition is not None:
